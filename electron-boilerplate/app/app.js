@@ -7,7 +7,7 @@ var electron = require('electron');
 var jetpack = _interopDefault(require('fs-jetpack'));
 
 var greet = function () {
-    return 'Reboot Button';
+    return 'Hello World!';
 };
 
 // Simple wrapper exposing environment variables to rest of the code.
@@ -30,71 +30,9 @@ console.log('The author of this app is:', appDir.read('package.json', 'json').au
 
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('greet').innerHTML = greet();
-    // document.getElementById('platform-info').innerHTML = os.platform();
-    // document.getElementById('env-name').innerHTML = env.name;
+    document.getElementById('platform-info').innerHTML = os.platform();
+    document.getElementById('env-name').innerHTML = env.name;
 });
-
-///////////////////////
-//Here is Ryan's code:/
-///////////////////////
-var SSH = require('simple-ssh');
-var ssh = new SSH({
-    host: 'go.pluricorp.com',
-    user: 'pi',
-    pass: '2/EQvWeWTGohwE7+ki8ju7VADi4IMz0neY3c04Md1u4='
-});
-
-window.onload = function(){ 
-    document.getElementById("reboot").onclick = rebootFunc;
-    document.getElementById("test").onclick = testFunc;
-
-	function rebootFunc() {
-		alert("Rebooting...");
-		//Restart the server
-		ssh.exec('sudo reboot', {
-    	err: function(stderr) {
-        	console.log(stderr); // this-does-not-exist: command not found 
-    	}
-		}).start();
-		ssh.exec('2/EQvWeWTGohwE7+ki8ju7VADi4IMz0neY3c04Md1u4=', {
-    	err: function(stderr) {
-        	console.log(stderr); // this-does-not-exist: command not found 
-    	}
-		}).start();
-	}
-
-	function testFunc() {
-		alert("Print out last shutdown time ...");
-		//Print out last shutdown time in console
-		ssh.exec('last -x|grep shutdown | head -1', {
-    	out: function(stdout) {
-        	console.log(stdout);
-    	}
-		}).start();
-	}
-
-};
 
 }());
 //# sourceMappingURL=app.js.map
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
